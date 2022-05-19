@@ -1,10 +1,7 @@
 {
   "profiles": {
     "HackersDiscordBot": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "token": "OTUwNjUzNzkxNDc1MjIwNTUy.YicDVg.XaPE1KwRJ0hrWkPJTp3GoiGOuWs"
-      }
+      "commandName": "Project"
     }
   }
 }

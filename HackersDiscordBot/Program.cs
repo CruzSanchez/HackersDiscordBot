@@ -2,8 +2,10 @@
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
 using HackersDiscordBot.Commands;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -11,11 +13,6 @@ namespace HackersDiscordBot
 {
     class Program
     {
-        public Program()
-        {
-            
-        }
-
         static Task Main(string[] args) => new Program().MainAsync();
 
         private async Task MainAsync()
@@ -37,6 +34,7 @@ namespace HackersDiscordBot
 
             commands.RegisterCommands<AlexModule>();
             commands.RegisterCommands<GreetingModule>();
+            commands.RegisterCommands<ShowMeModule>();
 
             await discord.ConnectAsync();
             await Task.Delay(-1);
@@ -44,7 +42,12 @@ namespace HackersDiscordBot
 
         private static string GetDiscordToken()
         {
-            return Environment.GetEnvironmentVariable("token");
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            return builder["token"];
         }       
     }
 }
